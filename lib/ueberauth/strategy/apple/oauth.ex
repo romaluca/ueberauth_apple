@@ -59,11 +59,11 @@ defmodule Ueberauth.Strategy.Apple.OAuth do
       {:error, %{body: %{"error" => error}}} ->
         {:error, {error, "error requesting token"}}
 
-      {:ok, %{token: %{access_token: nil} = token}} ->
+      {:ok1, %{token: %{access_token: nil} = token}} ->
         %{"error" => error} = token.other_params
         {:error, {error, "no access token"}}
 
-      {:ok, %{token: token}} ->
+      {:ok1, %{token: token}} ->
         {:ok, token}
     end
   end
