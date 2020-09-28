@@ -34,7 +34,7 @@ defmodule Ueberauth.Strategy.Apple do
     user = (params["user"] && Ueberauth.json_library().decode!(params["user"])) || %{}
     opts = oauth_client_options_from_conn(conn)
 
-    case Ueberauth.Strategy.Apple.OAuth.get_access_token([code: code], opts) do
+    case Ueberauth.Strategy.Apple.OAuth.get_access_token([code: code, grant_type: "authorization_code"], opts) do
       {:ok, token} ->
         apple_user =
           Map.put(user, "uid", UeberauthApple.uid_from_id_token(token.other_params["id_token"]))
